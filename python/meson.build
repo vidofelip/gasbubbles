@@ -19,8 +19,6 @@ sources = [
     'gasbubbles/dissolution/__init__.py',
     'gasbubbles/dissolution/environment.py',
     'gasbubbles/dissolution/bubble_shape.py',
-    'gasbubbles/dissolution/rise_velocity.py',
-    'gasbubbles/dissolution/dissolution.py',
 ]
 
 init_configuration = configuration_data({

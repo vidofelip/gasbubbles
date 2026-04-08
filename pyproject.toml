@@ -98,9 +98,18 @@ netcdf4 = ">=1.7.4,<2"
 nbmake = ">=1.5.5,<2"
 pkg-config = ">=0.29.2,<0.30"
 python = "3.14.*"
+ 
+# Workaround for conda-forge flang-activation bug on Windows:
+# The activation script passes clang_rt.builtins path with -Wl,-defaultlib: which
+# MSVC's link.exe ignores. Adding the dir to LIB lets the linker find it.
+# When updating flang version, update the "19" in the path to match.
+# See: https://github.com/conda-forge/flang-activation-feedstock/issues/22
+[tool.pixi.target.win-64.activation.env]
+LIB = "%CONDA_PREFIX%\\lib\\clang\\19\\lib\\windows;%LIB%"
 
 # Note: We don't use pixi pypi-dependencies for editable installs with meson-python
 # because it caches temporary build tool paths. Use 'pixi run dev-install' instead.
+
 
 [tool.pixi.environments]
 default = { solve-group = "default" }
@@ -115,3 +124,6 @@ test = { cmd = "pytest python/tests/", depends-on = ["init"] }
 jupyter = { cmd = "jupyter lab ipynb", depends-on = ["init"] }
 test_notebooks = "python test_notebooks.py"
 clean_notebooks = "python clean_notebooks.py"
+
+[tool.pixi.target.win-64.dependencies]
+vc = ">=14.3,<15"
