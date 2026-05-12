@@ -15,7 +15,7 @@ https://pixi.prefix.dev/latest/installation/
 ### 2. Clone and initialize
 
 ```bash
-git clone --recurse-submodules https://github.com/peter-urban/gasbubbles.git
+git clone --recurse-submodules https://github.com/vidofelip/gasbubbles.git
 cd gasbubbles
 
 #this builds e.g. the tamoc library and installs the python dependencies
